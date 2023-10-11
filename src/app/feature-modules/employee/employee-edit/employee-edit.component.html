@@ -1,0 +1,75 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">Edit Employee</h4>
+  <button type="button" class="close btn btn-light" aria-label="Close" (click)="onCancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="employeeEditForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <input type="text" class="form-control" id="empId" formControlName="empId" hidden>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="empName">Name:</label>
+      <input type="text" class="form-control" id="empName" formControlName="empName"
+      [ngClass]="{ 'is-invalid': employeeEditForm.get('empName')?.invalid && employeeEditForm.get('empName')?.touched  , 'is-valid' : employeeEditForm.get('empName')?.valid && employeeEditForm.get('empName')?.touched }">
+      <div *ngIf="employeeEditForm.get('empName')?.invalid && employeeEditForm.get('empName')?.touched  "
+        class="invalid-feedback">
+        <div *ngIf="employeeEditForm.get('empName')?.hasError('required')">Name is required</div>
+      </div>
+      <div *ngIf="employeeEditForm.get('empName')?.valid && employeeEditForm.get('empName')?.untouched "
+        class="success-feedback">
+      </div>
+
+    </div>
+    <div class="form-group mb-3">
+      <label for="empEmail">Email:</label>
+      <input type="email" class="form-control" id="empEmail" formControlName="empEmail"
+      [ngClass]="{ 'is-invalid': employeeEditForm.get('empEmail')?.invalid && employeeEditForm.get('empEmail')?.touched  , 'is-valid' : employeeEditForm.get('empEmail')?.valid && employeeEditForm.get('empEmail')?.touched }">
+      <div *ngIf="employeeEditForm.get('empEmail')?.invalid && employeeEditForm.get('empEmail')?.touched  "
+        class="invalid-feedback">
+        <div *ngIf="employeeEditForm.get('empEmail')?.hasError('required')">Email is required</div>
+        <div *ngIf="employeeEditForm.get('empEmail')?.hasError('email')">
+          Email should have a valid email format.</div>
+      </div>
+      <div *ngIf="employeeEditForm.get('empEmail')?.valid && employeeEditForm.get('empEmail')?.untouched "
+        class="success-feedback">
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label for="empAddress">Address:</label>
+      <textarea class="form-control" id="empAddress" formControlName="empAddress"[ngClass]="{ 'is-invalid': employeeEditForm.get('empAddress')?.invalid && employeeEditForm.get('empAddress')?.touched  , 'is-valid' : employeeEditForm.get('empAddress')?.valid && employeeEditForm.get('empAddress')?.touched }"></textarea>
+      <div *ngIf="employeeEditForm.get('empAddress')?.invalid && employeeEditForm.get('empAddress')?.touched  "
+        class="invalid-feedback">
+        <div *ngIf="employeeEditForm.get('empAddress')?.hasError('required')">Address is required</div>
+      </div>
+      <div *ngIf="employeeEditForm.get('empAddress')?.valid && employeeEditForm.get('empAddress')?.untouched "
+        class="success-feedback">
+      </div>
+
+
+    </div>
+    <div class="form-group mb-3">
+      <label for="empPhone">Phone:</label>
+      <input type="number" class="form-control" id="empPhone" formControlName="empPhone"
+      [ngClass]="{ 'is-invalid': employeeEditForm.get('empPhone')?.invalid && employeeEditForm.get('empPhone')?.touched  , 'is-valid' : employeeEditForm.get('empPhone')?.valid && employeeEditForm.get('empPhone')?.touched }">
+      <div *ngIf="employeeEditForm.get('empPhone')?.invalid && employeeEditForm.get('empPhone')?.touched  "
+        class="invalid-feedback">
+        <div *ngIf="employeeEditForm.get('empPhone')?.hasError('required')">Mobile is required</div>
+        <div *ngIf="employeeEditForm.get('empPhone')?.hasError('pattern')">
+          Mobile should be 11 numbers only, starting with
+          011, 012, or 010.</div>
+      </div>
+      <div *ngIf="employeeEditForm.get('empPhone')?.valid && employeeEditForm.get('empPhone')?.untouched "
+        class="success-feedback">
+      </div>
+    </div>
+
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+  <button type="button" class="btn btn-primary" [disabled]="employeeEditForm.invalid" (click)="onSubmit()">Save</button>
+</div>

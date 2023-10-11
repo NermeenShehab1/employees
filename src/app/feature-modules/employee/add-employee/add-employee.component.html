@@ -1,0 +1,73 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">Add Employee</h4>
+  <button type="button" class="close btn btn-light" aria-label="Close" (click)="onCancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="mt-3">
+    <div class="mb-3">
+      <label for="empName">Name:</label>
+      <input type="text" class="form-control" id="empName" name="empName" formControlName="empName"
+        [ngClass]="{ 'is-invalid': employeeForm.get('empName')?.invalid && employeeForm.get('empName')?.touched  , 'is-valid' : employeeForm.get('empName')?.valid && employeeForm.get('empName')?.touched }">
+      <div *ngIf="employeeForm.get('empName')?.invalid && employeeForm.get('empName')?.touched  "
+        class="invalid-feedback">
+        <div *ngIf="employeeForm.get('empName')?.hasError('required')">Name is required</div>
+      </div>
+      <div *ngIf="employeeForm.get('empName')?.valid && employeeForm.get('empName')?.untouched "
+        class="success-feedback">
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="empEmail">Email:</label>
+      <input type="email" class="form-control" id="empEmail" name="empEmail" formControlName="empEmail"
+        [ngClass]="{ 'is-invalid': employeeForm.get('empEmail')?.invalid && employeeForm.get('empEmail')?.touched  , 'is-valid' : employeeForm.get('empEmail')?.valid && employeeForm.get('empEmail')?.touched }">
+      <div *ngIf="employeeForm.get('empEmail')?.invalid && employeeForm.get('empEmail')?.touched  "
+        class="invalid-feedback">
+        <div *ngIf="employeeForm.get('empEmail')?.hasError('required')">Email is required</div>
+        <div *ngIf="employeeForm.get('empEmail')?.hasError('email')">
+          Email should have a valid email format.</div>
+      </div>
+      <div *ngIf="employeeForm.get('empEmail')?.valid && employeeForm.get('empEmail')?.untouched "
+        class="success-feedback">
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="empAddress">Address:</label>
+      <textarea rows="3" class="form-control" id="empAddress" name="empAddress" formControlName="empAddress"
+        [ngClass]="{ 'is-invalid': employeeForm.get('empAddress')?.invalid && employeeForm.get('empAddress')?.touched  , 'is-valid' : employeeForm.get('empAddress')?.valid && employeeForm.get('empAddress')?.touched }"></textarea>
+      <div *ngIf="employeeForm.get('empAddress')?.invalid && employeeForm.get('empAddress')?.touched  "
+        class="invalid-feedback">
+        <div *ngIf="employeeForm.get('empAddress')?.hasError('required')">Address is required</div>
+      </div>
+      <div *ngIf="employeeForm.get('empAddress')?.valid && employeeForm.get('empAddress')?.untouched "
+        class="success-feedback">
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="empPhone">Mobile:</label>
+      <input type="number"   class="form-control" id="empPhone" name="empPhone" formControlName="empPhone"
+        [ngClass]="{ 'is-invalid': employeeForm.get('empPhone')?.invalid && employeeForm.get('empPhone')?.touched  , 'is-valid' : employeeForm.get('empPhone')?.valid && employeeForm.get('empPhone')?.touched }">
+      <div *ngIf="employeeForm.get('empPhone')?.invalid && employeeForm.get('empPhone')?.touched  "
+        class="invalid-feedback">
+        <div *ngIf="employeeForm.get('empPhone')?.hasError('required')">Mobile is required</div>
+        <div *ngIf="employeeForm.get('empPhone')?.hasError('pattern')">
+          Mobile should be 11 numbers only, starting with
+          011, 012, or 010.</div>
+      </div>
+      <div *ngIf="employeeForm.get('empPhone')?.valid && employeeForm.get('empPhone')?.untouched "
+        class="success-feedback">
+      </div>
+
+    </div>
+
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+  <button type="button" class="btn btn-success" [disabled]="employeeForm.invalid" (click)="onSubmit()">Add</button>
+</div>

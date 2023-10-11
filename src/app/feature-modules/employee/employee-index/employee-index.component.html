@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-lg navbar-dark  bg-dark py-md-3 mb-5">
+  <div class="container">
+    <a class="navbar-brand">
+      Manage Employees
+    </a>
+    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-row justify-content-end mt-3 mt-xl-0">
+        <li class="nav-item mx-md-3 me-5">
+          <button class="btn btn-danger m-1 " (click)="deleteSelectedEmps()" [disabled]="selectedEmps.length === 0">
+            Delete</button>
+        </li>
+        <li class="nav-item mx-md-3 ms-xl-0 ">
+          <button class="  btn btn-success m-1" (click)="openAddEmployeeModal()">Add New Employee</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<ng-container *ngIf="isLoading; else employeesData">
+  <div class="text-center mt-3">
+    <i class="pi pi-spin pi-spinner fs-2" ></i> loading ...
+  </div>
+</ng-container>
+<ng-template #employeesData>
+  <div class="card m-4">
+    <ng-container *ngIf="employees.length > 0; else noEmployeesFound">
+      <p-table #employeeTable [value]="employees" [paginator]="paginator" [rows]="rows" [rowsPerPageOptions]="rowsPerPageOptions">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 4rem">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="selectAll" (change)="toggleSelectAll()">
+            </th>
+            <th >index </th>
+            <th pSortableColumn="empName" >Name <p-sortIcon field="empName"></p-sortIcon></th>
+            <th pSortableColumn="empEmail" >Email<p-sortIcon field="empEmail"></p-sortIcon></th>
+            <th pSortableColumn="empAddress">Address<p-sortIcon field="empAddress"></p-sortIcon>
+            </th>
+            <th pSortableColumn="empPhone">Phone<p-sortIcon field="empPhone"></p-sortIcon></th>
+            <th >Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
+          <tr>
+            <td>
+              <input type="checkbox" class="form-check-input" [(ngModel)]="employee.selected"
+                (change)="handleCheckboxChange(employee)">
+            </td>
+            <td>{{rowIndex + 1}}</td>
+            <td>{{ employee.empName }}</td>
+            <td>{{ employee.empEmail }}</td>
+            <td>{{ employee.empAddress }}</td>
+            <td>{{ employee.empPhone }}</td>
+            <td>
+              <button class="btn btn-outline-warning m-1" (click)="openEditDialog(employee)">
+                edit
+              </button>
+              <button class="btn btn-outline-danger m-1" (click)="deleteEmployee(employee)">
+                delete
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </ng-container>
+    <ng-template #noEmployeesFound>
+      <div class="text-center mt-3 alert alert-danger">
+        <h5>No employees found.</h5>
+      </div>
+    </ng-template>
+  </div>
+</ng-template>
