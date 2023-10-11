@@ -50,7 +50,7 @@
 
     <div class="mb-3">
       <label for="empPhone">Mobile:</label>
-      <input type="number"   class="form-control" id="empPhone" name="empPhone" formControlName="empPhone"
+      <input type="text"   class="form-control" id="empPhone" name="empPhone" formControlName="empPhone"
         [ngClass]="{ 'is-invalid': employeeForm.get('empPhone')?.invalid && employeeForm.get('empPhone')?.touched  , 'is-valid' : employeeForm.get('empPhone')?.valid && employeeForm.get('empPhone')?.touched }">
       <div *ngIf="employeeForm.get('empPhone')?.invalid && employeeForm.get('empPhone')?.touched  "
         class="invalid-feedback">
