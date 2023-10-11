@@ -53,7 +53,7 @@
     </div>
     <div class="form-group mb-3">
       <label for="empPhone">Phone:</label>
-      <input type="number" class="form-control" id="empPhone" formControlName="empPhone"
+      <input type="text" class="form-control" id="empPhone" formControlName="empPhone"
       [ngClass]="{ 'is-invalid': employeeEditForm.get('empPhone')?.invalid && employeeEditForm.get('empPhone')?.touched  , 'is-valid' : employeeEditForm.get('empPhone')?.valid && employeeEditForm.get('empPhone')?.touched }">
       <div *ngIf="employeeEditForm.get('empPhone')?.invalid && employeeEditForm.get('empPhone')?.touched  "
         class="invalid-feedback">
